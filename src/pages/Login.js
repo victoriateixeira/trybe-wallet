@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { userLogin } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -6,7 +9,6 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      disabled: true,
     };
   }
 
@@ -15,6 +17,7 @@ class Login extends React.Component {
     const minlength = 6;
     const validatesEmail = /\S+@\S+\.\S+/.test(email);
     const validatePassword = password.length >= minlength;
+    return validatesEmail && validatePassword;
   };
 
   handlesInputChange = (event) => {
@@ -22,6 +25,14 @@ class Login extends React.Component {
     this.setState({
       [name]: value,
     });
+  };
+
+  handlesClick = () => {
+    const { dispatch, history } = this.props;
+    const { email, password } = this.state;
+
+    dispatch(userLogin(email, password));
+    history.push('/carteira');
   };
 
   render() {
@@ -35,6 +46,7 @@ class Login extends React.Component {
               placeholder="email"
               id="email"
               name="email"
+              onChange={ this.handlesInputChange }
             />
           </label>
           <label htmlFor="password">
@@ -43,13 +55,30 @@ class Login extends React.Component {
               placeholder="password"
               id="password"
               name="password"
+              onChange={ this.handlesInputChange }
             />
+
           </label>
-          <button type="button"> Entrar </button>
+          <button
+            type="button"
+            disabled={ !this.validatesForm() }
+            onClick={ this.handlesClick }
+          >
+            {' '}
+            Entrar
+            {' '}
+
+          </button>
         </form>
       </div>
     );
   }
 }
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
-export default Login;
+export default connect()(Login);
