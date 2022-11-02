@@ -1,8 +1,14 @@
 import React from 'react';
+import Header from '../components/Header';
+// import store from '../redux/store';
 
 class Wallet extends React.Component {
   render() {
-    return <div>TrybeWallet</div>;
+    return (
+      <div>
+        <Header />
+      </div>
+    );
   }
 }
 

@@ -40,8 +40,9 @@ class Login extends React.Component {
       <div>
         Login
         <form action="">
-          <label htmlFor="email">
+          <label htmlFor="email-input">
             <input
+              data-testid="email-input"
               type="email"
               placeholder="email"
               id="email"
@@ -49,8 +50,9 @@ class Login extends React.Component {
               onChange={ this.handlesInputChange }
             />
           </label>
-          <label htmlFor="password">
+          <label htmlFor="password-input">
             <input
+              data-testid="password-input"
               type="password"
               placeholder="password"
               id="password"
@@ -64,10 +66,7 @@ class Login extends React.Component {
             disabled={ !this.validatesForm() }
             onClick={ this.handlesClick }
           >
-            {' '}
             Entrar
-            {' '}
-
           </button>
         </form>
       </div>
