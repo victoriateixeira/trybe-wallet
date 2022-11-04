@@ -26,7 +26,8 @@ class WalletForm extends Component {
     });
   };
 
-  handlesAddExpense = async () => {
+  handlesAddExpense = async (event) => {
+    event.preventDefault();
     const { dispatch, expenses, isLoading } = this.props;
     const { currency } = this.state;
     console.log(typeof currency);
@@ -60,7 +61,7 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = this.state;
     return (
       <div>
-        <form action="">
+        <form action="" onSubmit={ this.handlesAddExpense }>
           <label htmlFor="value">
             <input
               type="text"
@@ -130,7 +131,7 @@ class WalletForm extends Component {
           </label>
           <button
             type="submit"
-            onClick={ this.handlesAddExpense }
+
           >
             Adicionar despesa
 

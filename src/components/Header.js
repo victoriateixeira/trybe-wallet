@@ -12,7 +12,7 @@ class Header extends Component {
         acc += curr.value * curr.exchangeRates[currency].ask;
         return acc;
       }, 0);
-      return parseFloat(totalAmount).toFixed(2);
+      return totalAmount.toFixed(2);
     }
     return '0';
   };

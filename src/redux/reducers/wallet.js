@@ -1,7 +1,8 @@
 import { SAVE_CURRENCIES,
   REQUEST_CURRENCIES,
   REQUEST_FAILED,
-  ADD_EXPENSE } from '../actions';
+  ADD_EXPENSE,
+  DELETE_EXPENSE } from '../actions';
 
 const initialState = {
   currencies: '',
@@ -32,6 +33,11 @@ const wallet = (state = initialState, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses].filter((expense) => expense.id !== action.payload),
     };
 
   default:

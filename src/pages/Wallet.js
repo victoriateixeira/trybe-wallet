@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import { getCurrencies } from '../redux/actions';
+import Table from '../components/Table';
 // import stor from '../redux/store';
 
 class Wallet extends React.Component {
@@ -13,17 +14,19 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, expenses } = this.props;
     return (
       <div>
         <Header />
         {!isLoading && <WalletForm />}
+        {expenses.length > 0 && <Table />}
       </div>
     );
   }
 }
 const mapStateToProps = (globalState) => ({
   isLoading: globalState.wallet.isLoading,
+  expenses: globalState.wallet.expenses,
 });
 
 Wallet.propTypes = {
