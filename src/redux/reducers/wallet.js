@@ -1,12 +1,12 @@
-import { SAVE_CURRENCIES, REQUEST_CURRENCIES, REQUEST_FAILED } from '../actions';
+import { SAVE_CURRENCIES,
+  REQUEST_CURRENCIES,
+  REQUEST_FAILED,
+  ADD_EXPENSE } from '../actions';
 
 const initialState = {
-  amount: '',
   currencies: '',
-  decription: '',
-  paymentMethod: '',
-  tag: '',
   isLoading: true,
+  expenses: [],
 };
 
 const wallet = (state = initialState, action) => {
@@ -28,6 +28,12 @@ const wallet = (state = initialState, action) => {
       isLoading: false,
       error: action.payload,
     };
+  case ADD_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.payload],
+    };
+
   default:
     return state;
   }
