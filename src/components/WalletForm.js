@@ -30,8 +30,8 @@ class WalletForm extends Component {
     const { dispatch, expenses, isLoading } = this.props;
     const { currency } = this.state;
     console.log(typeof currency);
-    const exchangeRate = await dispatch(getExchangeRates(currency));
-    console.log(exchangeRate);
+    const exchangeRates = await dispatch(getExchangeRates());
+    console.log(exchangeRates);
 
     if (!isLoading) {
       if (expenses.length > 0) {
@@ -41,14 +41,14 @@ class WalletForm extends Component {
         const newExpense = {
           id,
           ...this.state,
-          exchangeRate,
+          exchangeRates,
         };
         dispatch(actionCreator(ADD_EXPENSE, newExpense));
       } else {
         const newExpense = {
           id: 0,
           ...this.state,
-          exchangeRate,
+          exchangeRates,
         };
         dispatch(actionCreator(ADD_EXPENSE, newExpense));
       }
@@ -106,9 +106,9 @@ class WalletForm extends Component {
               data-testid="method-input"
               onChange={ this.handleInputChange }
             >
-              <option value="dinheiro">Dinheiro</option>
-              <option value="credito">Cartão de crédito</option>
-              <option value="debito">Cartão de débito</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de crédito">Cartão de crédito</option>
+              <option value="Cartão de débito">Cartão de débito</option>
 
             </select>
           </label>
@@ -120,11 +120,11 @@ class WalletForm extends Component {
               data-testid="tag-input"
               onChange={ this.handleInputChange }
             >
-              <option value="alimentacao">Alimentação</option>
-              <option value="lazer">Lazer </option>
-              <option value="trabalho">Trabalho</option>
-              <option value="transporte">Transporte</option>
-              <option value="saude">Saúde</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer </option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
 
             </select>
           </label>

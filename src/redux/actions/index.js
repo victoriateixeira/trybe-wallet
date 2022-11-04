@@ -43,16 +43,15 @@ export function getCurrencies() {
     }
   };
 }
-export function getExchangeRates(curr) {
+export function getExchangeRates() {
   return async (dispatch) => {
     try {
       dispatch(actionCreator(REQUEST_CURRENCIES, true));
       const url = 'https://economia.awesomeapi.com.br/json/all';
       const response = await fetch(url);
-      const currenciesData = await response.json();
-      const exchangeRate = currenciesData[curr].ask;
+      const exchangeRates = await response.json();
       dispatch(actionCreator(REQUEST_CURRENCIES, false));
-      return Number(exchangeRate);
+      return exchangeRates;
     } catch (error) {
       dispatch(actionCreator(REQUEST_FAILED, error));
     }
