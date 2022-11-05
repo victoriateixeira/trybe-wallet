@@ -2,12 +2,16 @@ import { SAVE_CURRENCIES,
   REQUEST_CURRENCIES,
   REQUEST_FAILED,
   ADD_EXPENSE,
-  DELETE_EXPENSE } from '../actions';
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  ADD_EDIT_EXPENSE } from '../actions';
 
 const initialState = {
   currencies: '',
   isLoading: true,
   expenses: [],
+  isEditOn: false,
+  editExpenseId: '',
 };
 
 const wallet = (state = initialState, action) => {
@@ -38,6 +42,18 @@ const wallet = (state = initialState, action) => {
     return {
       ...state,
       expenses: [...state.expenses].filter((expense) => expense.id !== action.payload),
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      isEditOn: true,
+      editExpenseId: action.payload,
+    };
+  case ADD_EDIT_EXPENSE:
+    return {
+      ...state,
+      isEditOn: false,
+      expenses: [...state.expenses, action.payload].sort((a, b) => a.id - b.id),
     };
 
   default:

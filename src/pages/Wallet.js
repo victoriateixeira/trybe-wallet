@@ -14,12 +14,12 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { isLoading, expenses } = this.props;
+    const { isLoading } = this.props;
     return (
       <div>
         <Header />
         {!isLoading && <WalletForm />}
-        {expenses.length > 0 && <Table />}
+        {!isLoading && <Table />}
       </div>
     );
   }

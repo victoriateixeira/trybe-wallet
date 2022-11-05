@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionCreator,
+  ADD_EDIT_EXPENSE,
   ADD_EXPENSE,
+  DELETE_EXPENSE,
   getExchangeRates } from '../redux/actions';
 // import { saveCurrencies } from '../redux/actions';
 
@@ -56,12 +58,31 @@ class WalletForm extends Component {
     }
   };
 
+  handlesEditExpense = async (event) => {
+    event.preventDefault();
+    const { dispatch, isLoading, editExpenseId } = this.props;
+    const { currency } = this.state;
+    console.log(typeof currency);
+    const exchangeRates = await dispatch(getExchangeRates());
+    console.log(exchangeRates);
+
+    if (!isLoading) {
+      const editedExpense = {
+        id: editExpenseId,
+        ...this.state,
+        exchangeRates,
+      };
+      dispatch(actionCreator(DELETE_EXPENSE, editExpenseId));
+      dispatch(actionCreator(ADD_EDIT_EXPENSE, editedExpense));
+    }
+  };
+
   render() {
-    const { currencies } = this.props;
+    const { currencies, isEditOn } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
       <div>
-        <form action="" onSubmit={ this.handlesAddExpense }>
+        <form action="">
           <label htmlFor="value">
             <input
               type="text"
@@ -129,13 +150,25 @@ class WalletForm extends Component {
 
             </select>
           </label>
-          <button
-            type="submit"
+          {!isEditOn
+            ? (
+              <button
+                type="submit"
+                onClick={ this.handlesAddExpense }
+              >
+                Adicionar despesa
 
-          >
-            Adicionar despesa
+              </button>
+            )
+            : (
+              <button
+                type="submit"
+                onClick={ this.handlesEditExpense }
+              >
+                Editar despesa
 
-          </button>
+              </button>
+            )}
         </form>
       </div>
 
@@ -147,6 +180,8 @@ const mapStateToProps = (globalState) => ({
   currencies: globalState.wallet.currencies,
   isLoading: globalState.wallet.isLoading,
   expenses: globalState.wallet.expenses,
+  isEditOn: globalState.wallet.isEditOn,
+  editExpenseId: globalState.wallet.editExpenseId,
 });
 
 WalletForm.propTypes = {
@@ -154,6 +189,8 @@ WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   isLoading: PropTypes.bool.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isEditOn: PropTypes.bool.isRequired,
+  editExpenseId: PropTypes.number.isRequired,
 
 };
 export default connect(mapStateToProps)(WalletForm);
