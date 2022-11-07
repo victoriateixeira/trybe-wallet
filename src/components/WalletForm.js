@@ -20,11 +20,30 @@ class WalletForm extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const { isEditOn, editExpenseId } = this.props;
+    if (prevProps.isEditOn !== isEditOn && isEditOn) {
+      this.keepsCurrentValuesOnEdit(editExpenseId);
+    }
+  }
+
   handleInputChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     this.setState({
       [name]: value,
+    });
+  };
+
+  keepsCurrentValuesOnEdit = (id) => {
+    const { expenses } = this.props;
+    const editedExpense = expenses.find((expense) => expense.id === id);
+    this.setState({
+      value: editedExpense.value,
+      description: editedExpense.description,
+      currency: editedExpense.currency,
+      method: editedExpense.method,
+      tag: editedExpense.tag,
     });
   };
 

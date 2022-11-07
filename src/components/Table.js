@@ -6,38 +6,39 @@ import { actionCreator, DELETE_EXPENSE, EDIT_EXPENSE } from '../redux/actions';
 class Table extends Component {
   render() {
     const { expenses, dispatch } = this.props;
-    const sixteenCharacters = -16;
+
     return (
       <div>
         <table>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-
-          {expenses.length > 0
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            {expenses.length > 0
             && expenses.map((expense) => (
               <tr key={ expense.id }>
                 <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
-                <td>{expense.value}</td>
+                <td>{Number(expense.value).toFixed(2)}</td>
                 <td>
-                  {(expense.exchangeRates[expense.currency].name)
-                    .slice(0, sixteenCharacters)}
+                  {(expense.exchangeRates[expense.currency].name)}
 
                 </td>
-                <td>{expense.currency}</td>
+                <td>{Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
                 <td>
-                  {((expense.value) * (expense.exchangeRates[expense.currency].ask)
-                  ).toFixed(2)}
+                  {(Number(expense.value) * (expense.exchangeRates[expense.currency].ask))
+                    .toFixed(2)}
 
                 </td>
                 <td>Real</td>
@@ -59,7 +60,7 @@ class Table extends Component {
                 </td>
               </tr>
             ))}
-
+          </tbody>
         </table>
       </div>
     );
