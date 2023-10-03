@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import logo from '../assets/logo_Trybe_Wallet.svg';
+import profile from '../assets/Vector.png';
+import moedas from '../assets/Moedas.png';
+import './Header.css';
 
 class Header extends Component {
   sumsTotalExpenses = () => {
@@ -21,17 +25,25 @@ class Header extends Component {
     const { email } = this.props;
 
     return (
-      <div>
-        <div data-testid="email-field">
-          {` Email: ${email}`}
+      <div className="header-container">
+        <img src={ logo } alt="trybe-wallet-logo" className="wallet-logo" />
+
+        <div data-testid="email-field" className="email-header">
+          <img src={ profile } alt="profile-vector" />
+          {`  ${email}`}
         </div>
-        Despesa total:
-        <span data-testid="total-field">
-          {this.sumsTotalExpenses()}
-        </span>
-        <div data-testid="header-currency-field">
-          {' BRL'}
+        <div className="total-header">
+          <img src={ moedas } alt="coins-vector" />
+          <span className="total-header title">Total de despesas:</span>
+          <span data-testid="total-field">
+
+            {this.sumsTotalExpenses()}
+          </span>
+          <span data-testid="header-currency-field">
+            {' BRL'}
+          </span>
         </div>
+
       </div>
     );
   }

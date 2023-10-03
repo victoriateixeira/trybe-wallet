@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionCreator, USER_LOGIN } from '../redux/actions';
+import { actionCreator, USER_LOGIN } from '../../redux/actions';
+import logo from '../../assets/logo_Trybe_Wallet.svg';
+import './Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -37,11 +39,13 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        Login
-        <form action="">
+      <div className="box-login">
+
+        <img src={ logo } alt="trybe-wallet-logo" className="wallet-logo" />
+        <form action="" className="login-form">
           <label htmlFor="email-input">
             <input
+              className="login-input"
               data-testid="email-input"
               type="email"
               placeholder="email"
@@ -52,6 +56,7 @@ class Login extends React.Component {
           </label>
           <label htmlFor="password-input">
             <input
+              className="login-input"
               data-testid="password-input"
               type="password"
               placeholder="password"
@@ -62,6 +67,7 @@ class Login extends React.Component {
 
           </label>
           <button
+            className="login-button"
             type="button"
             disabled={ !this.validatesForm() }
             onClick={ this.handlesClick }
@@ -69,6 +75,7 @@ class Login extends React.Component {
             Entrar
           </button>
         </form>
+
       </div>
     );
   }

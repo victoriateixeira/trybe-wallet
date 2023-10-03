@@ -6,6 +6,7 @@ import { actionCreator,
   ADD_EXPENSE,
   DELETE_EXPENSE,
   getExchangeRates } from '../redux/actions';
+import './WalletForm.css';
 // import { saveCurrencies } from '../redux/actions';
 
 class WalletForm extends Component {
@@ -100,9 +101,11 @@ class WalletForm extends Component {
     const { currencies, isEditOn } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
+
       <div>
-        <form action="">
-          <label htmlFor="value">
+        <form action="" className="form-container">
+          <label htmlFor="value" className="form-prompt">
+            Valor
             <input
               type="text"
               id="value"
@@ -113,7 +116,8 @@ class WalletForm extends Component {
               onChange={ this.handleInputChange }
             />
           </label>
-          <label htmlFor="description">
+          <label htmlFor="description" className="form-prompt">
+            Descrição da despesa
             <input
               type="text"
               id="description"
@@ -125,7 +129,8 @@ class WalletForm extends Component {
             />
           </label>
 
-          <label htmlFor="currency">
+          <label htmlFor="currency" className="form-prompt">
+            Moeda
             <select
               name="currency"
               id="currency"
@@ -139,7 +144,8 @@ class WalletForm extends Component {
 
             </select>
           </label>
-          <label htmlFor="method">
+          <label htmlFor="method" className="form-prompt">
+            Método de pagamento
             <select
               name="method"
               id="method"
@@ -153,7 +159,8 @@ class WalletForm extends Component {
 
             </select>
           </label>
-          <label htmlFor="tag">
+          <label htmlFor="tag" className="form-prompt">
+            Categoria da despesa
             <select
               name="tag"
               id="tag"
@@ -169,26 +176,29 @@ class WalletForm extends Component {
 
             </select>
           </label>
-          {!isEditOn
-            ? (
-              <button
-                type="submit"
-                onClick={ this.handlesAddExpense }
-              >
-                Adicionar despesa
-
-              </button>
-            )
-            : (
-              <button
-                type="submit"
-                onClick={ this.handlesEditExpense }
-              >
-                Editar despesa
-
-              </button>
-            )}
         </form>
+        {!isEditOn
+          ? (
+            <button
+              type="submit"
+              onClick={ this.handlesAddExpense }
+              className="form-button"
+            >
+              Adicionar despesa
+
+            </button>
+          )
+          : (
+            <button
+              type="submit"
+              className="form-button"
+              onClick={ this.handlesEditExpense }
+            >
+              Editar despesa
+
+            </button>
+          )}
+
       </div>
 
     );

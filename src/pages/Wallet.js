@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import { getCurrencies } from '../redux/actions';
 import Table from '../components/Table';
+import './Wallet.css';
 // import stor from '../redux/store';
 
 class Wallet extends React.Component {
@@ -16,10 +17,15 @@ class Wallet extends React.Component {
   render() {
     const { isLoading } = this.props;
     return (
-      <div>
-        <Header />
-        {!isLoading && <WalletForm />}
-        {!isLoading && <Table />}
+      <div className="main-container">
+        <div className="wallet-upper-container">
+          <Header />
+          {!isLoading && <WalletForm />}
+        </div>
+        <div className="wallet-bottom-container">
+          {!isLoading && <Table />}
+        </div>
+
       </div>
     );
   }

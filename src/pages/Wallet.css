@@ -1,0 +1,24 @@
+.wallet-upper-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: -4px 9px 13px 0 rgba(5, 18, 54, 0.4);
+  display: flex;
+  flex-direction: column;
+  grid-area: 1 / 1 / 4 / 6;
+  height: 482px;
+  justify-content: flex-end;
+  margin: auto;
+  width: 1037px;
+  z-index: 1;
+}
+
+.main-container {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.wallet-bottom-container {
+  grid-area: 3 / 1 / 6 / 6;
+}
