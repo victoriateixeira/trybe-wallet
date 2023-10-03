@@ -1,43 +1,40 @@
+.wallet-logo {
+  height: 52.293px;
+  padding: 0;
+  width: 250.185px;
+}
 
-  .wallet-logo {
-    width: 250.185px;
-    height: 52.293px;
-    padding: 0;
+.total-header {
+  align-items: center;
+  color: #003be5;
+  display: flex;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0 5px;
+}
 
-    }
+.title {
+  font-weight: 900;
+}
 
-  .total-header {
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    color: #003BE5;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
+.email-header {
+  align-items: center;
+  color: #2fc18c;
+  display: flex;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 0 5px;
+  width: 123px;
+}
 
-  .title {
-    font-weight: 900;
-  }
-
-  .email-header {
-    padding: 0 5px;
-    width: 123px;
-    color: #2FC18C;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    display: flex;
-    align-items: center;
-  }
-
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-around;
-    padding: 0px 60px;
-  }
-
+.header-container {
+  align-content: space-around;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+}
